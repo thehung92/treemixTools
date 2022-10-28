@@ -16,5 +16,60 @@ git fetch origin main
 git checkout main
 git  merge origin/main
 
+# 
 
 ```
+
+## log r command
+
+```R
+# the following r code will create a blank file in the R dir
+library(devtools)
+use_r("treemix_plot_graph")
+
+# write simple function in that blank file
+
+# test the function like you have build and load the package # this will only put the function into your global env
+load_all()
+
+# build the documentation with
+document()
+
+# run standard r check if everything work # it create error when there is no example to check
+check()
+
+# create MIT license with you as the author # will create a LICENSE file and an .md file
+use_mit_license("Hung TT Nguyen")
+
+# a minimallt working R package
+install()
+
+# Test
+# it's good practice to write a meaningful test for your function
+# use_testhat function will add the `testthat` to the package dependencies
+use_testthat()
+# create a test for a function
+use_test('treemix_plot_graph')
+
+# after editing the test script
+# run the test with the following function
+test()
+
+
+# It's always good to import function from another packages
+# for example let's use a stringr function
+# the following function will add stringr to dependencies and description so that you don't have to edit manually
+use_package('stringr')
+# refer to the function with `stringr::str_c`
+# document your function and load it
+document()
+load_all()
+
+# try create a README.md with the code
+# it's more automatic, it's better
+use_readme_rmd()
+# after you are satisfied with your markdown code, build the md file
+build_readme()
+
+```
+
