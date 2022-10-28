@@ -22,6 +22,8 @@ git  merge origin/main
 
 ## log r command
 
+url: 
+
 ```R
 # the following r code will create a blank file in the R dir
 library(devtools)
@@ -33,7 +35,7 @@ use_r("treemix_plot_graph")
 load_all()
 
 # build the documentation with
-document()
+document() # or Cmd + shift + D
 
 # run standard r check if everything work # it create error when there is no example to check
 check()
@@ -41,7 +43,7 @@ check()
 # create MIT license with you as the author # will create a LICENSE file and an .md file
 use_mit_license("Hung TT Nguyen")
 
-# a minimallt working R package
+# a minimall working R package
 install()
 
 # Test
@@ -70,6 +72,10 @@ load_all()
 use_readme_rmd()
 # after you are satisfied with your markdown code, build the md file
 build_readme()
+
+# prep external raw data for test
+#
+
 
 ```
 
