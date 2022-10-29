@@ -20,12 +20,10 @@ devtools::install_github("thehung92/treemixTools")
 
 ## Example
 
-This code load the treemix result from the package external data
+This code load the treemix result from the package external data. Now my
+library can be load with a single `library` function call
 
 ``` r
-# library(tidyverse)
-# library(treedataverse)
-# library(aphylo)
 library(treemixTools)
 #> Loading required package: aphylo
 #> Loading required package: ape
@@ -95,7 +93,23 @@ plot_treemix_graph(obj)
 #>   identify.gg ggfun
 ```
 
-<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
+<img src="man/figures/README-graph-1.png" width="100%" />
+
+## plot the drift params heatmap
+
+``` r
+plot_treemix_drift(obj)
+```
+
+<img src="man/figures/README-drift-1.png" width="100%" />
+
+## plot the residual heatmap
+
+``` r
+plot_treemix_residual(obj)
+```
+
+<img src="man/figures/README-residual-1.png" width="100%" />
 
 You’ll still need to render `README.Rmd` regularly, to keep `README.md`
 up-to-date. `devtools::build_readme()` is handy for this. You could also

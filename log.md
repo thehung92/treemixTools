@@ -79,7 +79,7 @@ load_all()
 # it's more automatic, it's better
 use_readme_rmd()
 # after you are satisfied with your markdown code, build the md file
-build_readme()
+devtools::build_readme()
 
 # prep external raw data for test
 #
