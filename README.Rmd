@@ -34,8 +34,9 @@ devtools::install_github("thehung92/treemixTools")
 This code load the treemix result from the package external data
 
 ```{r example}
-library(tidyverse)
-library(treedataverse)
+# library(tidyverse)
+# library(treedataverse)
+# library(aphylo)
 library(treemixTools)
 #
 infiles <- system.file('extdata', package='treemixTools') |> list.files(full.names=TRUE)

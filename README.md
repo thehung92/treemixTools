@@ -23,27 +23,12 @@ devtools::install_github("thehung92/treemixTools")
 This code load the treemix result from the package external data
 
 ``` r
-library(tidyverse)
-#> ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
-#> ✔ ggplot2 3.3.6      ✔ purrr   0.3.4 
-#> ✔ tibble  3.1.8      ✔ dplyr   1.0.10
-#> ✔ tidyr   1.2.1      ✔ stringr 1.4.1 
-#> ✔ readr   2.1.2      ✔ forcats 0.5.1 
-#> ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-#> ✖ dplyr::filter() masks stats::filter()
-#> ✖ dplyr::lag()    masks stats::lag()
-library(treedataverse)
-#> ── Attaching packages ─────────────────────────────────── treedataverse 0.0.1 ──
-#> ✔ ape         5.6.2      ✔ ggtree      3.2.1 
-#> ✔ tidytree    0.4.0      ✔ ggtreeExtra 1.4.2 
-#> ✔ treeio      1.18.1     
-#> ── Conflicts ────────────────────────────────────── treedataverse_conflicts() ──
-#> ✖ treeio::drop.tip() masks ape::drop.tip()
-#> ✖ ggtree::expand()   masks tidyr::expand()
-#> ✖ tidytree::filter() masks dplyr::filter(), stats::filter()
-#> ✖ dplyr::lag()       masks stats::lag()
-#> ✖ ggtree::rotate()   masks ape::rotate()
+# library(tidyverse)
+# library(treedataverse)
+# library(aphylo)
 library(treemixTools)
+#> Loading required package: aphylo
+#> Loading required package: ape
 #
 infiles <- system.file('extdata', package='treemixTools') |> list.files(full.names=TRUE)
 inStem <- infiles[1] |> gsub(pattern=".cov.gz", replacement="")
@@ -102,6 +87,12 @@ str(obj)
 plot_treemix_graph(obj)
 #> The following `from` values were not present in `x`: 3, 4, 5, 6
 #> The following `from` values were not present in `x`: 4, 5, 6
+#> Registered S3 method overwritten by 'treeio':
+#>   method          from  
+#>   as.phylo.matrix aphylo
+#> Registered S3 method overwritten by 'ggtree':
+#>   method      from 
+#>   identify.gg ggfun
 ```
 
 <img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />

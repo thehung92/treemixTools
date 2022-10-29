@@ -12,13 +12,18 @@
 #' obj <- read_treemixResult(inStem)
 #' plot_treemix_graph(obj)
 #'
+#'
 #' @export
 plot_treemix_graph <- function(obj){
+  # check package requirement
+  if(!requireNamespace(c('aphylo', 'ape'))) {
+    stop("package \"aphylo\" must be installed")
+  }
   # convert df.edge to phylo
   df.edge <- obj$edges %>%
-    dplyr::filter(V5!="MIG")
+    filter(V5!="MIG")
   mat.edge <- as.matrix(df.edge[,1:2])
-  phylo <- ape::as.phylo(mat.edge, edge.length=df.edge$V3)
+  phylo <- aphylo:::as.phylo.matrix(mat.edge, edge.length=df.edge$V3)
   # create df.link from migration edge
   df.link <- obj$edges %>%
     dplyr::filter(V5=="MIG") %>%

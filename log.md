@@ -62,7 +62,7 @@ test()
 # the following function will add stringr to dependencies and description so that you don't have to edit manually
 use_package('stringr')
 use_package('ape')
-use_package('aphylo')
+use_package('aphylo', type='Depends')
 use_package('magrittr')
 use_package('ggtree')
 use_package('ggplot2')
@@ -83,6 +83,12 @@ build_readme()
 
 # prep external raw data for test
 #
+
+# create package level import with the following function # it will create R/treemixTools-package.R
+usethis::use_package_doc()
+#  function to import package directive
+usethis::use_import_from('dplyr', 'filter')
+usethis::use_import_from('ape', 'as.phylo')
 
 
 ```

@@ -16,10 +16,11 @@ Config/testthat/edition: 3
 Imports:
     dplyr,
     ape,
-    aphylo,
     stringr,
     magrittr,
     ggtree,
     ggplot2,
     ggthemes,
     grid
+Depends: 
+    aphylo
