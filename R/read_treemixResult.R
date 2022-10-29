@@ -19,7 +19,9 @@ read_treemixResult <- function(stem, ...) {
   }
   # read the covariance matrix
   cov <- as.matrix( read.table(gzfile(ff[1]), as.is = TRUE, head = TRUE, quote = "", comment.char = "") )
+  closeAllConnections()
   mod <- as.matrix( read.table(gzfile(ff[2]), as.is = TRUE, head = TRUE, quote = "", comment.char = "") )
+  closeAllConnections()
   # compute the residual
   resid <- mod - cov
   # filter the matrix to only the lower triangle to plot
@@ -37,14 +39,19 @@ read_treemixResult <- function(stem, ...) {
   d <- paste0(stem, ".vertices.gz")
   e <- paste0(stem, ".edges.gz")
   d <- read.table(gzfile(d), as.is = TRUE, comment.char = "", quote = "")
+  closeAllConnections()
   e <- read.table(gzfile(e), as.is  = TRUE, comment.char = "", quote = "")
+  closeAllConnections()
   e[,3] <- e[,3]*e[,4]
   #e[,3] <- e[,3]*e[,4]
   # read the tree as an phylo object
-  tree <- ape::read.tree(text = readLines(gzfile(ff[3]), n = 1))
+  conn <- gzfile(ff[3])
+  tree <- ape::read.tree(text = readLines(conn, n = 1))
+  close(conn)
+  # aggregate in an obj
+  obj <- list(cov = cov, cov.est = mod, resid = resid,
+              sse = sse, ssm = ssm, r2 = r2, llik = llik, m = m,
+              tree = tree, vertices = d, edges = e)
   # return the obj in a list
-  return( list(cov = cov, cov.est = mod, resid = resid,
-               sse = sse, ssm = ssm, r2 = r2, llik = llik, m = m,
-               tree = tree, vertices = d, edges = e) )
-
+  return(obj)
 }

@@ -22,7 +22,11 @@ plot_treemix_drift <- function(obj) {
     filter(V5=="TIP")
   # colnames(df.drift) <- df.lab$V2[match(colnames(df.drift), df.lab$V1)]
   # rownames(df.drift) <- df.lab$V2[match(rownames(df.drift), df.lab$V1)]
-  df <- custom_convert(as.matrix(df.drift))
+  # sort by pop name to make it consistent
+  df.drift <- as.matrix(df.drift)
+  df.drift <- df.drift[ , order(colnames(df.drift))]
+  df.drift <- df.drift[order(rownames(df.drift)), ]
+  df <- custom_convert(df.drift)
   #
   fun.color <- colorRampPalette(c('lightgrey', 'yellow', 'green', 'blue'))
   fig <- ggplot(df, aes(pop1, pop2, fill=value)) +
@@ -56,7 +60,10 @@ custom_convert <- function(mat) {
   mat[lower.tri(mat)] <- NA
   df <- as_tibble(mat) %>%
     mutate(pop1=rownames(mat)) %>%
-    tidyr::pivot_longer(cols=1:ncol(mat), names_to = 'pop2', values_to = 'value') %>%
-    mutate(pop1=factor(pop1, levels=rownames(mat)), pop2=factor(pop2, levels=colnames(mat)))
+    tidyr::pivot_longer(cols=1:ncol(mat),
+                        names_to = 'pop2',
+                        values_to = 'value') %>%
+    mutate(pop1=factor(pop1, levels=rownames(mat)),
+           pop2=factor(pop2, levels=colnames(mat)))
   return(df)
 }

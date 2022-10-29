@@ -14,8 +14,12 @@
 #'
 #' @export
 plot_treemix_residual <- function(obj) {
+  # sort by pop name to make it consistent
+  df.resid <- obj$resid
+  df.resid <- df.resid[, order(colnames(df.resid))]
+  df.resid <- df.resid[order(rownames(df.resid)), ]
   #
-  df <- custom_convert(obj$resid)
+  df <- custom_convert(df.resid)
   #
   fig.resid <- ggplot(df, aes(pop1, pop2, fill=value)) +
     geom_tile(color='white', na.rm=TRUE) +

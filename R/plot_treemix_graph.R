@@ -34,8 +34,8 @@ plot_treemix_graph <- function(obj){
     dplyr::filter(V5=="TIP")
   phylo$tip.label <- df.lab$V2[match(phylo$tip.label, df.lab$V1)]
   df.link <- df.link %>%
-    dplyr::mutate(from=plyr::mapvalues(from, from=df.lab$V1, to=df.lab$V2),
-           to=plyr::mapvalues(to, from=df.lab$V1, to=df.lab$V2))
+    dplyr::mutate(from=plyr::mapvalues(from, from=df.lab$V1, to=df.lab$V2, warn_missing = FALSE),
+                  to=plyr::mapvalues(to, from=df.lab$V1, to=df.lab$V2, warn_missing = FALSE))
   # plot tree with ggtree
   fig <- ggtree::ggtree(phylo) +
     ggtree::geom_tiplab() + ggtree::geom_nodepoint() +
