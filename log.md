@@ -16,7 +16,9 @@ git fetch origin main
 git checkout main
 git  merge origin/main
 
-#
+# git overwrite file on remote
+git add .
+git commit --no-verify -am 'overwrite readme file'
 
 
 ```
@@ -28,6 +30,7 @@ url:
 ```R
 # the following r code will create a blank file in the R dir
 library(devtools)
+library(usethis)
 use_r("treemix_plot_graph")
 use_r('read_treemixResult')
 
@@ -89,7 +92,6 @@ usethis::use_package_doc()
 #  function to import package directive
 usethis::use_import_from('dplyr', 'filter')
 usethis::use_import_from('ape', 'as.phylo')
-
 
 ```
 

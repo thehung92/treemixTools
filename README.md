@@ -83,8 +83,6 @@ str(obj)
 
 ``` r
 plot_treemix_graph(obj)
-#> The following `from` values were not present in `x`: 3, 4, 5, 6
-#> The following `from` values were not present in `x`: 4, 5, 6
 #> Registered S3 method overwritten by 'treeio':
 #>   method          from  
 #>   as.phylo.matrix aphylo

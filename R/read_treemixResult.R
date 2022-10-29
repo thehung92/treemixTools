@@ -19,9 +19,7 @@ read_treemixResult <- function(stem, ...) {
   }
   # read the covariance matrix
   cov <- as.matrix( read.table(gzfile(ff[1]), as.is = TRUE, head = TRUE, quote = "", comment.char = "") )
-  closeAllConnections()
   mod <- as.matrix( read.table(gzfile(ff[2]), as.is = TRUE, head = TRUE, quote = "", comment.char = "") )
-  closeAllConnections()
   # compute the residual
   resid <- mod - cov
   # filter the matrix to only the lower triangle to plot
@@ -39,9 +37,7 @@ read_treemixResult <- function(stem, ...) {
   d <- paste0(stem, ".vertices.gz")
   e <- paste0(stem, ".edges.gz")
   d <- read.table(gzfile(d), as.is = TRUE, comment.char = "", quote = "")
-  closeAllConnections()
   e <- read.table(gzfile(e), as.is  = TRUE, comment.char = "", quote = "")
-  closeAllConnections()
   e[,3] <- e[,3]*e[,4]
   #e[,3] <- e[,3]*e[,4]
   # read the tree as an phylo object
