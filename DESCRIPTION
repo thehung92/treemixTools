@@ -13,5 +13,13 @@ RoxygenNote: 7.2.1
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
-Imports: 
-    stringr
+Imports:
+    dplyr,
+    ape,
+    aphylo,
+    stringr,
+    magrittr,
+    ggtree,
+    ggplot2,
+    ggthemes,
+    grid

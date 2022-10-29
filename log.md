@@ -16,7 +16,8 @@ git fetch origin main
 git checkout main
 git  merge origin/main
 
-# 
+#
+
 
 ```
 
@@ -28,15 +29,13 @@ url:
 # the following r code will create a blank file in the R dir
 library(devtools)
 use_r("treemix_plot_graph")
+use_r('read_treemixResult')
 
 # write simple function in that blank file
-
 # test the function like you have build and load the package # this will only put the function into your global env
-load_all()
-
+load_all() # or Cmd + shift + L
 # build the documentation with
 document() # or Cmd + shift + D
-
 # run standard r check if everything work # it create error when there is no example to check
 check()
 
@@ -62,6 +61,15 @@ test()
 # for example let's use a stringr function
 # the following function will add stringr to dependencies and description so that you don't have to edit manually
 use_package('stringr')
+use_package('ape')
+use_package('aphylo')
+use_package('magrittr')
+use_package('ggtree')
+use_package('ggplot2')
+use_package('ggthemes')
+use_package('grid')
+
+
 # refer to the function with `stringr::str_c`
 # document your function and load it
 document()
