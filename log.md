@@ -19,7 +19,8 @@ git  merge origin/main
 # git overwrite file on remote
 git add .
 git commit --no-verify -am 'overwrite readme file'
-
+#
+git add . && git commit -am 'fix plot residual and reknit readme'
 
 ```
 

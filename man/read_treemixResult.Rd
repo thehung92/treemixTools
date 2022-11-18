@@ -18,5 +18,5 @@ Check if files exist and read treemix result into a list
 \examples{
 infiles <- system.file('extdata', package='treemixTools') |> list.files(full.names=TRUE)
 inStem <- infiles[1] |> gsub(pattern=".cov.gz", replacement="")
-read_treemixResult(inStem)
+obj <- read_treemixResult(inStem)
 }

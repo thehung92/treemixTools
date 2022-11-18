@@ -14,5 +14,6 @@ a long tibble
 }
 \description{
 convert the pairwise matrix into long table that can be plot by geom_tile
+This is an internal function with no export
 }
 \keyword{internal}

@@ -53,6 +53,7 @@ plot_treemix_drift <- function(obj) {
 #' internal function
 #'
 #' convert the pairwise matrix into long table that can be plot by geom_tile
+#' This is an internal function with no export
 #' @keywords internal
 #' @param mat the pairwise matrix in matrix class
 #' @return a long tibble

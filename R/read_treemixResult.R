@@ -9,7 +9,7 @@
 #' @examples
 #' infiles <- system.file('extdata', package='treemixTools') |> list.files(full.names=TRUE)
 #' inStem <- infiles[1] |> gsub(pattern=".cov.gz", replacement="")
-#' read_treemixResult(inStem)
+#' obj <- read_treemixResult(inStem)
 #' @export
 read_treemixResult <- function(stem, ...) {
   # check if all the files of treemix result exist
@@ -17,13 +17,19 @@ read_treemixResult <- function(stem, ...) {
   if (!all(sapply(ff, file.exists))) {
     stop(paste0("Can't find all outputs from TreeMix run with prefix '",stem,"'"))
   }
-  # read the covariance matrix
+  # read the covariance matrix and order based on names
   cov <- as.matrix( read.table(gzfile(ff[1]), as.is = TRUE, head = TRUE, quote = "", comment.char = "") )
+  cov <- cov[order(rownames(cov)), order(colnames(cov))]
   mod <- as.matrix( read.table(gzfile(ff[2]), as.is = TRUE, head = TRUE, quote = "", comment.char = "") )
+  mod <- mod[order(rownames(mod)), order(colnames(mod))]
+  # read the covariance standard error
+  covse <- as.matrix( read.table(gzfile(paste0(stem, '.covse.gz')), as.is=TRUE, head = TRUE, quote="", comment.char="") )
   # compute the residual
-  resid <- mod - cov
+  resid <- cov - mod
   # filter the matrix to only the lower triangle to plot
   i <- upper.tri(resid, diag = FALSE)
+  # compute mean covse
+  mse <- mean( covse )
   # compute r2
   sse <- sum( (resid[i] - mean(resid[i]))^2 )
   ssm <- sum( (mod[i] - mean(mod[i]))^2 )
@@ -45,8 +51,9 @@ read_treemixResult <- function(stem, ...) {
   tree <- ape::read.tree(text = readLines(conn, n = 1))
   close(conn)
   # aggregate in an obj
-  obj <- list(cov = cov, cov.est = mod, resid = resid,
-              sse = sse, ssm = ssm, r2 = r2, llik = llik, m = m,
+  obj <- list(cov = cov, covse = covse,
+              mod = mod, resid = resid,
+              mse = mse, sse = sse, ssm = ssm, r2 = r2, llik = llik, m = m,
               tree = tree, vertices = d, edges = e)
   # return the obj in a list
   return(obj)

@@ -54,12 +54,10 @@ plot_treemix_graph(obj)
 plot_treemix_drift(obj)
 ```
 
-## plot the residual heatmap
+## plot the residual heatmap 
 
 ```{r residual, fig.height=3, fig.width=6}
 plot_treemix_residual(obj)
 ```
 
-
-
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this. You could also use GitHub Actions to re-render `README.Rmd` every time you push. An example workflow can be found here: <https://github.com/r-lib/actions/tree/v1/examples>
+## merge

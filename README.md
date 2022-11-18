@@ -32,22 +32,27 @@ infiles <- system.file('extdata', package='treemixTools') |> list.files(full.nam
 inStem <- infiles[1] |> gsub(pattern=".cov.gz", replacement="")
 obj <- read_treemixResult(inStem)
 str(obj)
-#> List of 11
+#> List of 13
 #>  $ cov     : num [1:4, 1:4] 0.02073 -0.01012 -0.00619 -0.00442 -0.01012 ...
 #>   ..- attr(*, "dimnames")=List of 2
 #>   .. ..$ : chr [1:4] "AFR" "AN" "EASN" "EER"
 #>   .. ..$ : chr [1:4] "AFR" "AN" "EASN" "EER"
-#>  $ cov.est : num [1:4, 1:4] 0.01987 -0.00409 -0.00583 -0.00996 -0.00409 ...
+#>  $ covse   : num [1:4, 1:4] 0.000516 0.000176 0.000226 0.000266 0.000176 ...
 #>   ..- attr(*, "dimnames")=List of 2
-#>   .. ..$ : chr [1:4] "AFR" "EER" "EASN" "AN"
-#>   .. ..$ : chr [1:4] "AFR" "EER" "EASN" "AN"
-#>  $ resid   : num [1:4, 1:4] -0.000861 0.006032 0.000369 -0.00554 0.006032 ...
+#>   .. ..$ : chr [1:4] "AFR" "AN" "EASN" "EER"
+#>   .. ..$ : chr [1:4] "AFR" "AN" "EASN" "EER"
+#>  $ mod     : num [1:4, 1:4] 0.01987 -0.00996 -0.00583 -0.00409 -0.00996 ...
 #>   ..- attr(*, "dimnames")=List of 2
-#>   .. ..$ : chr [1:4] "AFR" "EER" "EASN" "AN"
-#>   .. ..$ : chr [1:4] "AFR" "EER" "EASN" "AN"
-#>  $ sse     : num 6.81e-05
+#>   .. ..$ : chr [1:4] "AFR" "AN" "EASN" "EER"
+#>   .. ..$ : chr [1:4] "AFR" "AN" "EASN" "EER"
+#>  $ resid   : num [1:4, 1:4] 0.000861 -0.00016 -0.000369 -0.000332 -0.00016 ...
+#>   ..- attr(*, "dimnames")=List of 2
+#>   .. ..$ : chr [1:4] "AFR" "AN" "EASN" "EER"
+#>   .. ..$ : chr [1:4] "AFR" "AN" "EASN" "EER"
+#>  $ mse     : num 0.00021
+#>  $ sse     : num 3.83e-07
 #>  $ ssm     : num 0.000102
-#>  $ r2      : num 0.33
+#>  $ r2      : num 0.996
 #>  $ llik    : num 76.7
 #>  $ m       : int 1
 #>  $ tree    :List of 4
@@ -86,9 +91,6 @@ plot_treemix_graph(obj)
 #> Registered S3 method overwritten by 'treeio':
 #>   method          from  
 #>   as.phylo.matrix aphylo
-#> Registered S3 method overwritten by 'ggtree':
-#>   method      from 
-#>   identify.gg ggfun
 ```
 
 <img src="man/figures/README-graph-1.png" width="100%" />
@@ -109,8 +111,4 @@ plot_treemix_residual(obj)
 
 <img src="man/figures/README-residual-1.png" width="100%" />
 
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this. You could also
-use GitHub Actions to re-render `README.Rmd` every time you push. An
-example workflow can be found here:
-<https://github.com/r-lib/actions/tree/v1/examples>
+## merge

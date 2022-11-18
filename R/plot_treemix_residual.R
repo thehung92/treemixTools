@@ -20,6 +20,8 @@ plot_treemix_residual <- function(obj) {
   df.resid <- df.resid[order(rownames(df.resid)), ]
   #
   df <- custom_convert(df.resid)
+  df <- df %>%
+    mutate(value = value / obj$mse)
   #
   fig.resid <- ggplot(df, aes(pop1, pop2, fill=value)) +
     geom_tile(color='white', na.rm=TRUE) +
@@ -39,6 +41,6 @@ plot_treemix_residual <- function(obj) {
       #legend.position = c(0.95,0.95)
       plot.title=element_text(hjust=0.5)
     ) +
-    guides(fill=guide_colorbar(title.position = 'top', title.hjust = 0.5))
+    guides(fill=guide_colorbar(title='res (SE)', title.position = 'top', title.hjust = 0.5))
   return(fig.resid)
 }
