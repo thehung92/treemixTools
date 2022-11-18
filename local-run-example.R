@@ -1,14 +1,15 @@
 #!/usr/bin/env Rscript
 #
-library(treemixTools)
+# library(treemixTools)
+devtools::load_all('/Users/hung/Data/side-project/treemixTools')
 library(tidyverse)
 library(patchwork)
 #
 infiles <- system.file('extdata', package='treemixTools') |> list.files(full.names=TRUE)
 inStem <- infiles[1] |> gsub(pattern=".cov.gz", replacement="")
 obj <- read_treemixResult(inStem)
-fig.tree <- plot_treemix_graph(obj) +
-  theme(legend.position = 'none')
+fig.tree <- plot_treemix_graph(obj)
+  # theme(legend.position = 'none')
 fig.drift <- plot_treemix_drift(obj)
 fig.resid <- plot_treemix_residual(obj)
 

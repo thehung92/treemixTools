@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of treemixTools is to ...
+The goal of treemixTools is to visualize treemix result with ggplot2 packages
 
 ## Installation
 
@@ -35,29 +35,41 @@ This code load the treemix result from the package external data. Now my library
 
 ```{r}
 library(treemixTools)
+library(tidyverse)
+library(patchwork)
 #
 infiles <- system.file('extdata', package='treemixTools') |> list.files(full.names=TRUE)
 inStem <- infiles[1] |> gsub(pattern=".cov.gz", replacement="")
 obj <- read_treemixResult(inStem)
-str(obj)
+names(obj)
 ```
 
 ## plot the graph with ggtree
 
 ```{r graph, fig.height=3, fig.width=6}
-plot_treemix_graph(obj)
+fig.tree <- plot_treemix_graph(obj)
+fig.tree
 ```
 
 ## plot the drift params heatmap
 
 ```{r drift, fig.height=3, fig.width=6}
-plot_treemix_drift(obj)
+fig.drift <- plot_treemix_drift(obj)
+fig.drift
 ```
 
 ## plot the residual heatmap 
 
 ```{r residual, fig.height=3, fig.width=6}
-plot_treemix_residual(obj)
+fig.resid <- plot_treemix_residual(obj)
+fig.resid
 ```
 
 ## merge
+
+```{r merge, fig.height=7, fig.width=6}
+fig.tree + fig.drift + fig.resid +
+  plot_layout(ncol=1, nrow=3) +
+  plot_annotation(tag_levels = 'A') & theme(legend.justification = "left")
+```
+

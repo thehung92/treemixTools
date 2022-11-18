@@ -20,7 +20,8 @@ git  merge origin/main
 git add .
 git commit --no-verify -am 'overwrite readme file'
 #
-git add . && git commit -am 'fix plot residual and reknit readme'
+git add . && git commit -am 'add merge reknit readme'
+git push
 
 ```
 
