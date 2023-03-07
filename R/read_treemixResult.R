@@ -58,3 +58,21 @@ read_treemixResult <- function(stem, ...) {
   # return the obj in a list
   return(obj)
 }
+#' parse vertices table from treemix object
+#'
+#' this is only a reminder with named data frame
+#'
+#' @param obj object from read_treemixResult function
+#'
+#' @return a named data frame of df.vertices
+#'
+#' @examples
+#' infiles <- system.file('extdata', package='treemixTools') |> list.files(full.names=TRUE)
+#' inStem <- infiles[1] |> gsub(pattern=".cov.gz", replacement="")
+#' obj <- read_treemixResult(inStem)
+parse_verDf_fromObj <- function(obj, ...) {
+  df.ver = obj$vertices |>
+    rename(node = 1, lab = 2, is.root = 3, is.mig = 4, is.tip = 5,
+           par = 6, chi1 = 7, ntip.clade1 = 8, chi2 = 9, ntip.clade2 = 10, newick = 11)
+  return(df.ver)
+}
