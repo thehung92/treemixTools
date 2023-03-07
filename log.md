@@ -97,3 +97,10 @@ usethis::use_import_from('ape', 'as.phylo')
 
 ```
 
+## add data
+
+```r
+# obj_treemix = obj
+save(obj_treemix, file="data/mydata.RData")
+
+```

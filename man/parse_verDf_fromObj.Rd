@@ -16,7 +16,5 @@ a named data frame of df.vertices
 this is only a reminder with named data frame
 }
 \examples{
-infiles <- system.file('extdata', package='treemixTools') |> list.files(full.names=TRUE)
-inStem <- infiles[1] |> gsub(pattern=".cov.gz", replacement="")
-obj <- read_treemixResult(inStem)
+parse_verDf_fromObj(obj_treemix)
 }
