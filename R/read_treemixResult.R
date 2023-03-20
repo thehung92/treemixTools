@@ -58,7 +58,8 @@ read_treemixResult <- function(stem, ...) {
   # return the obj in a list
   return(obj)
 }
-#' parse vertices table from treemix object
+
+#' Parse vertices table from treemix object
 #'
 #' this is only a reminder with named data frame
 #'
