@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_treemixResult.R
 \name{parse_verDf_fromObj}
 \alias{parse_verDf_fromObj}
-\title{Parse vertices table from treemix object}
+\title{parse vertices table from treemix object}
 \usage{
 parse_verDf_fromObj(obj, ...)
 }
