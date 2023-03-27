@@ -1,7 +1,7 @@
 Package: treemixTools
 Type: Package
 Title: Plot treemix result with ggplot
-Version: 0.2.0
+Version: 0.2.1
 Author: thehung92
 Maintainer: thehung92phuyen <thehung92phuyen@gmail.com>
 Description: Provide functionality for analysis of treemix program
