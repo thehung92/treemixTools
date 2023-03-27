@@ -22,7 +22,7 @@ git commit --no-verify -am 'overwrite readme file'
 
 #
 git add .
-git commit -am 'edit color scale to 0-0.5'
+git commit -am 'add comment to clarify the content of obj'
 git push
 
 # revert to a previous commit and overwrite the change you may have on remote

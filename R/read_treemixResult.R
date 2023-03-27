@@ -18,21 +18,24 @@ read_treemixResult <- function(stem, ...) {
     stop(paste0("Can't find all outputs from TreeMix run with prefix '",stem,"'"))
   }
   # read the covariance matrix and order based on names
+  ## covariance matrix
   cov <- as.matrix( read.table(gzfile(ff[1]), as.is = TRUE, head = TRUE, quote = "", comment.char = "") )
   cov <- cov[order(rownames(cov)), order(colnames(cov))]
+  ## model covariance matrix
   mod <- as.matrix( read.table(gzfile(ff[2]), as.is = TRUE, head = TRUE, quote = "", comment.char = "") )
   mod <- mod[order(rownames(mod)), order(colnames(mod))]
   # read the covariance standard error
   covse <- as.matrix( read.table(gzfile(paste0(stem, '.covse.gz')), as.is=TRUE, head = TRUE, quote="", comment.char="") )
-  # compute the residual
+  # compute the residual matrix
   resid <- cov - mod
-  # filter the matrix to only the lower triangle to plot
+  # filter the matrix to only the lower triangle to compute other params
   i <- upper.tri(resid, diag = FALSE)
-  # compute mean covse
+  # compute mean standard error of covariance matrix estimated from genetic data
+  # this can be use to plot the standard error bar on the plot
   mse <- mean( covse )
-  # compute r2
-  sse <- sum( (resid[i] - mean(resid[i]))^2 )
-  ssm <- sum( (mod[i] - mean(mod[i]))^2 )
+  # compute r2 # Variance relatedness between populations explained by the model
+  sse <- sum( (resid[i] - mean(resid[i]))^2 ) # numerator of eq.30
+  ssm <- sum( (mod[i] - mean(mod[i]))^2 ) # denominator of eq.30
   r2 <- 1 - sse/ssm
   # number of migration event from .llik file
   llik.raw <- readLines(ff[6], n = 2)[2]
