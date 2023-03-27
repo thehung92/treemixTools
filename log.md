@@ -19,10 +19,16 @@ git  merge origin/main
 # git overwrite file on remote
 git add .
 git commit --no-verify -am 'overwrite readme file'
+
 #
-git add . && git commit -am 'add merge reknit readme'
+git add .
+git commit -am 'edit color scale to 0-0.5'
 git push
 
+# revert to a previous commit and overwrite the change you may have on remote
+git revert --no-commit 4b0d2b8..HEAD
+git commit -m "Revert to 4b0d2b8"
+git push --force-with-lease
 ```
 
 ## log r command

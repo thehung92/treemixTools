@@ -21,5 +21,4 @@ inStem <- infiles[1] |> gsub(pattern=".cov.gz", replacement="")
 obj <- read_treemixResult(inStem)
 plot_treemix_graph(obj)
 
-
 }

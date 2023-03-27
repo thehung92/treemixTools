@@ -12,7 +12,10 @@
 #' obj <- read_treemixResult(inStem)
 #' plot_treemix_graph(obj)
 #'
-#'
+#' @importFrom dplyr filter rename mutate mutate_at
+#' @importFrom plyr mapvalues
+#' @importFrom ggtree ggtree geom_tiplab geom_nodepoint geom_taxalink
+#' @importFrom ggplot2 scale_x_continuous expansion scale_color_gradient
 #' @export
 plot_treemix_graph <- function(obj){
   # check package requirement
@@ -26,26 +29,26 @@ plot_treemix_graph <- function(obj){
   phylo <- aphylo:::as.phylo.matrix(mat.edge, edge.length=df.edge$V3)
   # create df.link from migration edge
   df.link <- obj$edges %>%
-    dplyr::filter(V5=="MIG") %>%
-    dplyr::rename(from=1, to=2, weight=4, type=5) %>%
-    dplyr::mutate_at(c('from', 'to'), as.character)
+    filter(V5=="MIG") %>%
+    rename(from=1, to=2, weight=4, type=5) %>%
+    mutate_at(c('from', 'to'), as.character)
   # replace label based on vertices value in phylo and df.link before plotting
   df.lab <- obj$vertices %>%
-    dplyr::filter(V5=="TIP")
+    filter(V5=="TIP")
   phylo$tip.label <- df.lab$V2[match(phylo$tip.label, df.lab$V1)]
   df.link <- df.link %>%
-    dplyr::mutate(from=plyr::mapvalues(from, from=df.lab$V1, to=df.lab$V2, warn_missing = FALSE),
-                  to=plyr::mapvalues(to, from=df.lab$V1, to=df.lab$V2, warn_missing = FALSE))
+    mutate(from = mapvalues(from, from=df.lab$V1, to=df.lab$V2, warn_missing = FALSE),
+           to = mapvalues(to, from=df.lab$V1, to=df.lab$V2, warn_missing = FALSE))
   # plot tree with ggtree
-  fig <- ggtree::ggtree(phylo) +
-    ggtree::geom_tiplab() + ggtree::geom_nodepoint() +
-    ggplot2::scale_x_continuous(expand=ggplot2::expansion(mult=c(0.02,0.1))) +
-    ggtree::geom_taxalink(df.link, ggplot2::aes(taxa1=from, taxa2=to, color=weight),
+  fig <- ggtree(phylo) +
+    geom_tiplab() + geom_nodepoint() +
+    scale_x_continuous(expand = expansion(mult=c(0.02,0.1))) +
+    geom_taxalink(df.link, ggplot2::aes(taxa1=from, taxa2=to, color=weight),
                   arrow=grid::arrow(length=grid::unit(0.05, "npc")), size=1, alpha=0.5,
                   hratio=1) +
-    ggplot2::scale_color_gradient2(low='yellow', mid='red', high='darkred',
-                          midpoint=0.5, limits=c(0,1),
-                          name='MigrationWeight') +
+    scale_color_gradient(low='yellow', high='red',
+                         limits=c(0,0.5),
+                         name='MigrationWeight') +
     ggplot2::labs(x='Drift parameter') +
     ggplot2::theme(axis.line.x = ggplot2::element_line(),
           axis.title.x = ggplot2::element_text(),
